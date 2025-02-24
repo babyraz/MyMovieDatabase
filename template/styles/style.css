@@ -1,0 +1,150 @@
+@import url('./carousel.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables */
+:root {
+    --header-grey: #121212;
+    /* Primary BG bör vara din bakgrundsfärg */
+    --primary-bg: #000000;
+    --primary-white: #ffffff;
+    --primary-grey: #1A1A1A;
+    --text-yellow: #F5C518;
+}
+
+/* Base */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--primary-bg);
+    max-width: 100%;
+}
+
+/* Utils */
+.content-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.center {
+    margin: 0 auto;
+}
+
+.d-none {
+    display: none;
+}
+
+.header {
+    background-color: var(--header-grey);
+    width: 100%;
+    padding: 1.5rem;
+    z-index: 999;
+}
+
+.header__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    width: 150px;
+    background-color: yellow;
+}
+
+.header__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.header__input {
+    width: 50%;
+    padding: 1rem;
+    border-radius: 2rem 0 0 2rem;
+    border: none;
+}
+
+.header__form-btn {
+    border-radius: 0 2rem 2rem 0;
+    width: 5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.header__fav-btn {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: var(--text-yellow);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.movie-card {
+    background: var(--primary-grey);
+    color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+}
+
+.movie-poster {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.movie-year {
+    font-size: 1rem;
+    color: var(--text-yellow);
+}
+.popular-title {
+    color: white; /* Change this if needed */
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.movie-information {
+    background-color: #333; /* Mörk bakgrund */
+    color: #fff;            /* Vit text */
+    padding: 20px;          /* Lite inre marginal */
+    margin: 20px auto;      /* Utomstående marginal och centrerar innehållet */
+    border-radius: 8px;     /* Rundar hörnen lite */
+    max-width: 800px;       /* Begränsar bredden, kan justeras */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);  /* Ger lite skugga för kontrast */
+  }
+  
+  .movie-details img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .movie-details h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .movie-details p {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  
