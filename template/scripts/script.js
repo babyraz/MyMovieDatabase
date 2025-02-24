@@ -1,12 +1,40 @@
-import { fetchMovies, fetchMoviesFull } from './modules/api.js';  
+import { handleSearch } from './utils/domUtils.js'; // Importera handleSearch
+import { addEventListenerDetails, addEventListenersSearch } from './utils/utils.js'; // Importera addEventListenerDetails
+import { fetchMoviesFull } from './modules/api.js';  
 import { fetchTopMovies } from './modules/api.js';
 import { displayTopMovies, displayMovieDetails } from './utils/domUtils.js';
 import { renderTrailers } from './modules/caroussel.js';
-import { handleSearch } from './utils/domUtils.js'; 
 
-// Initialize the search functionality
-handleSearch();
-init();
+if (window.location.pathname.includes('index.html')) {
+    console.log('index.html');
+
+    init();
+    addEventListenersSearch();
+    
+
+} else if (window.location.pathname.includes('favorites.html')) {
+    console.log('favorites.html');
+
+} else if (window.location.pathname.includes('movie.html')) {
+    console.log('movie.html');
+
+    loadMovieDetails();
+    
+} else if (window.location.pathname.includes('search.html')) {
+    console.log('search.html');
+    
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q'); // Hämta query från URL
+
+    // Anropa handleSearch om query finns
+    if (query) {
+        handleSearch(query);
+    }
+    //addEventListenerDetails(); // Lägg till eventlyssnare för detaljerknappar
+}
+
+
 
 
 
@@ -27,48 +55,27 @@ function getRandomMovies(movies, count) {
 
 
 
-
-
-if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-    console.log('index.html');
-    
-}
-
-
-
-if(window.location.pathname === '/' || window.location.pathname === '/index.html') {
-    console.log('index.html');
-
-} else if(window.location.pathname === '/favorites.html') {
-    console.log('favorites.html');
-
-} else if(window.location.pathname === '/movie.html') {
-
-    console.log('movie.html');
-
-} else if(window.location.pathname === '/search.html') {
-    console.log('search.html');
-
-}
-
 async function loadMovieDetails() {
+    if (!window.location.pathname.includes('movie.html')) {
+        window.location.href = `movie.html?id=${encodeURIComponent(movieID)}`;
+        return; // Avsluta funktionen här för att undvika att fortsätta exekvering
+    }
+    
+    // Om vi redan är på movie.html, hämta ID från URL och visa detaljer
     const urlParams = new URLSearchParams(window.location.search);
-    const movieID = urlParams.get('id');  // Hämtar 'id' från URL (som är imdbID)
-
-    console.log('Movie ID från URL:', movieID);  // Debugging
+    const movieID = urlParams.get('id'); // Hämta movieID från URL
 
     if (movieID) {
-        // Hämtar detaljer om filmen med hjälp av imdbID
-        const movie = await fetchMoviesFull(movieID);
-        console.log('Hämtad film:', movie);  // Debugging
-        displayMovieDetails(movie);
+        try {
+            const movie = await fetchMoviesFull(movieID); // Hämta detaljer från API
+            console.log('Hämtad film:', movie); // Debugging
+            displayMovieDetails(movie);
+        } catch (error) {
+            console.error('Error fetching movie details:', error);
+        }
     } else {
-        console.error('No movie ID found in the URL.');
+        console.error('No movie ID found in URL.');
     }
 }
 
 
-// Om vi är på movie.html, kör funktionen
-if (window.location.pathname.includes('movie.html')) {
-    loadMovieDetails();
-}
