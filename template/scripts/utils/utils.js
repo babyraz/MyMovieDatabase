@@ -1,4 +1,4 @@
-
+import { addToFavorites } from '../modules/favorites.js';
 // Funktion för att lägga till eventlyssnare
 export async function addEventListenersSearch() {
     const searchBtn = document.getElementById('searchBtn');  // Hämta knappen från DOM
@@ -24,11 +24,11 @@ export async function addEventListenersSearch() {
 
 export function addEventListenerDetails() {
     const detailsButtons = document.querySelectorAll('.details-btn'); // Hämta alla knappar
-    console.log('eventlyssnare laddas');
+    
 
     detailsButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            console.log('eventlyssnare klickas');
+            
             event.preventDefault(); // Förhindra eventuell standardbeteende
             const movieId = button.getAttribute('data-id'); // Hämta filmens IMDb ID från knappen
 
@@ -40,3 +40,31 @@ export function addEventListenerDetails() {
         });
     });
 }
+
+export function addEventListenerFavorites(){
+    const favoritesBtn = document.querySelectorAll('.favorites-btn');
+    console.log('lyssnaren lyssnar');
+
+    favoritesBtn.forEach(button => {
+        button.addEventListener('click', (event) =>{
+            console.log('button pressed');
+            const movieID = button.getAttribute('data-id');
+
+            if (movieID){
+                addToFavorites(movieID)
+            }
+        });
+    });
+}
+
+/*export function addEventListenerFavorites() {
+    const buttons = document.querySelectorAll('.favorites-btn'); // Select all favorite buttons
+    buttons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const movieID = event.target.getAttribute('data-id'); // Get movieID from button
+            addToFavorites(movieID, event.target);  // Call your addToFavorites function
+        });
+    });
+
+}*/
+
