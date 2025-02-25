@@ -1,5 +1,5 @@
-import { handleSearch } from './utils/domUtils.js'; // Importera handleSearch
-import { addEventListenerDetails, addEventListenersSearch } from './utils/utils.js'; // Importera addEventListenerDetails
+import { handleSearch, displayFavorites } from './utils/domUtils.js'; // Importera handleSearch
+import { addEventListenerDetails, addEventListenerFavorites, addEventListenersSearch } from './utils/utils.js'; // Importera addEventListenerDetails
 import { fetchMoviesFull } from './modules/api.js';  
 import { fetchTopMovies } from './modules/api.js';
 import { displayTopMovies, displayMovieDetails } from './utils/domUtils.js';
@@ -9,11 +9,19 @@ if (window.location.pathname.includes('index.html')) {
     console.log('index.html');
 
     init();
-    addEventListenersSearch();
     
+    addEventListenersSearch();
+    addEventListenerFavorites();
+   
 
 } else if (window.location.pathname.includes('favorites.html')) {
     console.log('favorites.html');
+
+    displayFavorites();
+    
+    addEventListenerDetails();
+
+    //updateAllFavoriteButtons();
 
 } else if (window.location.pathname.includes('movie.html')) {
     console.log('movie.html');
@@ -22,6 +30,7 @@ if (window.location.pathname.includes('index.html')) {
     
 } else if (window.location.pathname.includes('search.html')) {
     console.log('search.html');
+
     
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -31,7 +40,7 @@ if (window.location.pathname.includes('index.html')) {
     if (query) {
         handleSearch(query);
     }
-    //addEventListenerDetails(); // Lägg till eventlyssnare för detaljerknappar
+    addEventListenerFavorites();
 }
 
 
@@ -39,10 +48,12 @@ if (window.location.pathname.includes('index.html')) {
 
 
 async function init() {
+   
+
     const movies = await fetchTopMovies();  // Get movies from API
 
     displayTopMovies(movies);  // Show movies in recommendations section
-
+    //updateAllFavoriteButtons();
     const randomMovies = getRandomMovies(movies, 5);  // Pick 5 random movies
     randomMovies.forEach((movie, index) => renderTrailers(movie, index + 1));  // Render trailers
 }
