@@ -1,3 +1,4 @@
+
 import { handleSearch, displayFavorites } from './utils/domUtils.js'; // Importera handleSearch
 import { addEventListenerDetails, addEventListenerFavorites, addEventListenersSearch } from './utils/utils.js'; // Importera addEventListenerDetails
 import { fetchMoviesFull } from './modules/api.js';  
@@ -88,5 +89,4 @@ async function loadMovieDetails() {
         console.error('No movie ID found in URL.');
     }
 }
-
 
