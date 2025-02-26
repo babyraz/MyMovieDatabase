@@ -108,20 +108,3 @@ export async function displayFavorites() {
     addEventListenerDetails();
     
 }
-
-/*export function updateAllFavoriteButtons() {
-    console.log('uppdaterar knappar');
-    const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
-    const buttons = document.querySelectorAll('.favorites-btn');
-
-    buttons.forEach(button => {
-        console.log('uppdaterad knapp');
-        const movieID = button.getAttribute('data-id');
-        if (favoritesList.includes(movieID)) {
-            console.log('button switch');
-            button.textContent = "Remove from favorites";
-        } else {
-            button.textContent = "Add to favorites";
-        }
-    });
-}*/
