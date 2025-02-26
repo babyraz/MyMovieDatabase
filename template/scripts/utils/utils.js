@@ -1,5 +1,5 @@
 import { addToFavorites } from '../modules/favorites.js';
-// Funktion för att lägga till eventlyssnare
+
 export async function addEventListenersSearch() {
     const searchBtn = document.getElementById('searchBtn');  // Hämta knappen från DOM
     const searchInput = document.getElementById('searchInput');  // Hämta sökfältet från DOM
@@ -56,15 +56,3 @@ export function addEventListenerFavorites(){
         });
     });
 }
-
-/*export function addEventListenerFavorites() {
-    const buttons = document.querySelectorAll('.favorites-btn'); // Select all favorite buttons
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const movieID = event.target.getAttribute('data-id'); // Get movieID from button
-            addToFavorites(movieID, event.target);  // Call your addToFavorites function
-        });
-    });
-
-}*/
-
