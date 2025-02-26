@@ -21,6 +21,7 @@
 body {
     background-color: var(--primary-bg);
     max-width: 100%;
+    
 }
 
 /* Utils */
@@ -75,6 +76,7 @@ body {
 }
 
 .header__fav-btn {
+    font-family: 'Gabarito', sans-serif;
     text-decoration: none;
     font-size: 1.5rem;
     color: var(--text-yellow);
@@ -83,7 +85,12 @@ body {
     cursor: pointer;
 }
 
+.popular-title {
+    font-family: 'Gabarito', sans-serif;
+}
+
 .card-container {
+    
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -92,6 +99,9 @@ body {
 }
 
 .movie-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
     background: var(--primary-grey);
     color: white;
     border-radius: 8px;
@@ -106,8 +116,10 @@ body {
 }
 
 .movie-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-family: 'Gabarito', sans-serif;
     margin: 0.5rem 0;
+
 }
 
 .movie-year {
@@ -122,6 +134,7 @@ body {
 }
 
 .movie-information {
+    font-family: 'Gabarito', sans-serif;
     background-color: #333; /* Mörk bakgrund */
     color: #fff;            /* Vit text */
     padding: 20px;          /* Lite inre marginal */
@@ -139,12 +152,70 @@ body {
   }
   
   .movie-details h2 {
+    
     font-size: 2em;
     margin-bottom: 10px;
   }
   
   .movie-details p {
+    
     font-size: 1em;
     margin-bottom: 10px;
   }
-  
+
+  .watch-trailer {
+    font-family: 'Gabarito', sans-serif;
+    color: rgb(235, 237, 247);
+    background-color:#282525;
+    padding: 1% 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    
+}
+.watch-trailer:hover {
+    background-color: rgb(133, 126, 126);
+}
+
+
+.details-btn {
+    font-family: 'Gabarito', sans-serif; /* Change font */
+    font-size: 16px; /* Adjust text size */
+    font-weight: bold; /* Make text bold */
+    text-transform: uppercase; /* Make text uppercase */
+    color: white; /* Text color */
+    background-color: #726966; /* Background color */
+    padding: 1px 5px; /* Padding around text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease-in-out;
+    margin: 10px;
+    margin-top: 10 px;
+}
+
+.details-btn:hover {
+    background-color:  #ece8e6;
+    color: #000000;
+}
+
+
+
+.favorites-btn {
+    font-family: 'Gabarito', sans-serif; /* Change font */
+    font-size: 16px; /* Adjust text size */
+    font-weight: bold; /* Make text bold */
+    text-transform: uppercase; /* Make text uppercase */
+    color: white; /* Text color */
+    background-color: #ff4500; /* Background color */
+    padding: 1px 5px; /* Padding around text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.favorites-btn:hover {
+    background-color: #cc3700;
+    color: #fff;
+}
