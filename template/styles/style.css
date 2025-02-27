@@ -28,6 +28,7 @@ body {
 .content-wrapper {
     max-width: 1180px;
     margin: 0 auto;
+   
 }
 .center {
     margin: 0 auto;
@@ -42,6 +43,7 @@ body {
     width: 100%;
     padding: 1.5rem;
     z-index: 999;
+    
 }
 
 .header__flex {
@@ -53,6 +55,7 @@ body {
 .header__logo {
     width: 150px;
     background-color: yellow;
+    transition: width 0.3s ease-in-out;
 }
 
 .header__form {
@@ -66,6 +69,7 @@ body {
     padding: 1rem;
     border-radius: 2rem 0 0 2rem;
     border: none;
+
 }
 
 .header__form-btn {
@@ -78,15 +82,31 @@ body {
 .header__fav-btn {
     font-family: 'Gabarito', sans-serif;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--text-yellow);
     background: none;
     border: none;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 .popular-title {
     font-family: 'Gabarito', sans-serif;
+}
+
+
+
+.favorites-title {
+    font-family: 'Gabarito', sans-serif;
+    color: #ece8e6;
+    text-align: center;
+
+}
+.search-title {
+    font-family: 'Gabarito', sans-serif;
+    color: #ece8e6;
+    text-align: center;
+
 }
 
 .card-container {
@@ -127,7 +147,7 @@ body {
     color: var(--text-yellow);
 }
 .popular-title {
-    color: white; /* Change this if needed */
+    color: white; 
     font-size: 2rem;
     text-align: center;
     margin: 20px 0;
@@ -135,13 +155,13 @@ body {
 
 .movie-information {
     font-family: 'Gabarito', sans-serif;
-    background-color: #333; /* Mörk bakgrund */
-    color: #fff;            /* Vit text */
-    padding: 20px;          /* Lite inre marginal */
-    margin: 20px auto;      /* Utomstående marginal och centrerar innehållet */
-    border-radius: 8px;     /* Rundar hörnen lite */
-    max-width: 800px;       /* Begränsar bredden, kan justeras */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);  /* Ger lite skugga för kontrast */
+    background-color: #333; 
+    color: #fff;        
+    padding: 20px;        
+    margin: 20px auto;     
+    border-radius: 8px;   
+    max-width: 800px;      
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
   }
   
   .movie-details img {
@@ -179,16 +199,16 @@ body {
 
 
 .details-btn {
-    font-family: 'Gabarito', sans-serif; /* Change font */
-    font-size: 16px; /* Adjust text size */
-    font-weight: bold; /* Make text bold */
-    text-transform: uppercase; /* Make text uppercase */
-    color: white; /* Text color */
-    background-color: #726966; /* Background color */
-    padding: 1px 5px; /* Padding around text */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Change cursor on hover */
+    font-family: 'Gabarito', sans-serif; 
+    font-size: 16px;
+    font-weight: bold; 
+    text-transform: uppercase; 
+    color: white; 
+    background-color: #726966; 
+    padding: 1px 5px;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
     transition: background-color 0.3s ease-in-out;
     margin: 10px;
     margin-top: 10 px;
@@ -202,16 +222,16 @@ body {
 
 
 .favorites-btn {
-    font-family: 'Gabarito', sans-serif; /* Change font */
-    font-size: 16px; /* Adjust text size */
-    font-weight: bold; /* Make text bold */
-    text-transform: uppercase; /* Make text uppercase */
-    color: white; /* Text color */
-    background-color: #ff4500; /* Background color */
-    padding: 1px 5px; /* Padding around text */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Change cursor on hover */
+    font-family: 'Gabarito', sans-serif;
+    font-size: 16px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    color: white; 
+    background-color: #ff4500; 
+    padding: 1px 5px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -219,3 +239,25 @@ body {
     background-color: #cc3700;
     color: #fff;
 }
+
+
+.header__input {
+    width: 50%;
+    max-width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    transition: width 0.3s ease;
+  }
+  
+
+  @media (max-width: 375px) {
+    
+   .header__input:focus {
+      width: 300%;  
+    }
+    .header__logo {
+        width: 100px; 
+    }
+  }
+
+  
