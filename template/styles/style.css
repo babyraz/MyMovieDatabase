@@ -162,6 +162,7 @@ body {
     border-radius: 8px;   
     max-width: 800px;      
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
+
   }
   
   .movie-details img {
@@ -169,6 +170,7 @@ body {
     height: auto;
     display: block;
     margin-bottom: 20px;
+    
   }
   
   .movie-details h2 {
@@ -181,6 +183,7 @@ body {
     
     font-size: 1em;
     margin-bottom: 10px;
+    
   }
 
   .watch-trailer {
