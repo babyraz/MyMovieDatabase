@@ -1,5 +1,5 @@
 import { addToFavorites } from '../modules/favorites.js';
-
+// Funktion för att lägga till eventlyssnare
 export async function addEventListenersSearch() {
     const searchBtn = document.getElementById('searchBtn');  // Hämta knappen från DOM
     const searchInput = document.getElementById('searchInput');  // Hämta sökfältet från DOM
@@ -17,7 +17,7 @@ export async function addEventListenersSearch() {
             }
         });
     } else {
-        console.log('Button or input not found!'); // Felsökning om knappen eller inputfältet inte hittas
+        
     }
 }
 
@@ -43,11 +43,11 @@ export function addEventListenerDetails() {
 
 export function addEventListenerFavorites(){
     const favoritesBtn = document.querySelectorAll('.favorites-btn');
-    console.log('lyssnaren lyssnar');
+    //console.log('lyssnaren lyssnar');
 
     favoritesBtn.forEach(button => {
         button.addEventListener('click', (event) =>{
-            console.log('button pressed');
+            //console.log('button pressed');
             const movieID = button.getAttribute('data-id');
 
             if (movieID){
@@ -56,3 +56,4 @@ export function addEventListenerFavorites(){
         });
     });
 }
+
