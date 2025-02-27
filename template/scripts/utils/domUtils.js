@@ -1,23 +1,12 @@
 import { getFavorites } from '../modules/favorites.js';
-import { fetchMovies, fetchMoviesFull, fetchMovieByID } from '../modules/api.js';
+import { fetchMovies, fetchMoviesFull, fetchMovieByID, fetchTopMovies } from '../modules/api.js';
 import { addEventListenerDetails, addEventListenerFavorites } from './utils.js';
 import { createMovieCard } from '../components/movieCard.js';  
+import { renderTrailers } from '../modules/caroussel.js';
 
 export function displayTopMovies(movies) {
-    
     const container = document.getElementById('cardContainer');
-    
-    if (!container) {
-        console.error("Container element not found");
-        return;
-    }
-
-    if (!movies || movies.length === 0) {
-        console.warn("No movies to display.");
-        return;
-    }
-
-    container.innerHTML = '';  // Clear previous content
+    container.innerHTML = '';  
 
     movies.forEach(movie => {
         const movieCard = createMovieCard(movie); // Använd den externa funktionen för att skapa card
@@ -46,21 +35,19 @@ export async function handleSearch(query) {
             addEventListenerFavorites();
             
         } else {
-            cardContainer.innerHTML = `<p>No movies found for "${query}".</p>`;
+            
+            const searchTitle = document.getElementById('favoritesHeader');
+            searchTitle.innerHTML = (`No movies found for "${query}"`);
         }
     } else {
-        cardContainer.innerHTML = "<p>Please enter a search term.</p>";
+        alert(`Please enter a search term.`);
     }
 }
 
 
 export function displayMovieDetails(movie) {
-    console.log("Movie data:", movie);
-    const detailsContainer = document.getElementById('movieInformation');  // Här använder vi rätt id
-    if (!detailsContainer) {
-        console.error("Details container not found");
-        return;
-    }
+    
+    const detailsContainer = document.getElementById('movieInformation'); 
 
     detailsContainer.innerHTML = `
         <div class="movie-details">
@@ -71,16 +58,19 @@ export function displayMovieDetails(movie) {
             <p><strong>Director:</strong> ${movie.Director}</p>
             <p><strong>Plot:</strong> ${movie.Plot}</p>
             <p><strong>IMDB Rating:</strong> ${movie.imdbRating}</p>
+            ${movie.imdbID ? `<button class="favorites-btn" data-id=${movie.imdbID}">Add to favorites</button>`: ''}
         </div>
     `;
 }
 
 export async function displayFavorites() {
     const favoritesList = getFavorites();
-    console.log('Favorites list:', favoritesList);
 
     if (!favoritesList || favoritesList.length === 0) {
-        console.log('No favorites found');
+        
+        const favoritesTitle = document.getElementById('favoritesTitle');
+        favoritesTitle.innerHTML = 'No favorites found';
+
         return;
     }
 
@@ -93,7 +83,7 @@ export async function displayFavorites() {
                 continue;
             }
 
-            if (movie.Response === "False") { // Handle 'False' responses from OMDB API
+            if (movie.Response === "False") { 
                 console.log('Movie not found:', movieID);
                 continue;
             }
@@ -109,19 +99,42 @@ export async function displayFavorites() {
     
 }
 
-/*export function updateAllFavoriteButtons() {
-    console.log('uppdaterar knappar');
-    const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
-    const buttons = document.querySelectorAll('.favorites-btn');
 
-    buttons.forEach(button => {
-        console.log('uppdaterad knapp');
-        const movieID = button.getAttribute('data-id');
-        if (favoritesList.includes(movieID)) {
-            console.log('button switch');
-            button.textContent = "Remove from favorites";
-        } else {
-            button.textContent = "Add to favorites";
+export async function loadMovieDetails() {
+    if (!window.location.pathname.includes('movie.html')) {
+        window.location.href = `movie.html?id=${encodeURIComponent(movieID)}`;
+        return; // Avsluta funktionen här för att undvika att fortsätta exekvering
+    }
+    
+    // Om vi redan är på movie.html, hämta ID från URL och visa detaljer
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieID = urlParams.get('id'); // Hämta movieID från URL
+
+    if (movieID) {
+        try {
+            const movie = await fetchMoviesFull(movieID); // Hämta detaljer från API
+            
+            displayMovieDetails(movie);
+        } catch (error) {
+            alert('Error fetching movie details:', error);
         }
-    });
-}*/
+    } else {
+        alert('No movie ID found in URL.');
+    }
+    addEventListenerFavorites();
+}
+
+export async function init() {
+    const movies = await fetchTopMovies();  
+
+    displayTopMovies(movies);  
+    
+    const randomMovies = getRandomMovies(movies, 5);  
+    randomMovies.forEach((movie, index) => renderTrailers(movie, index + 1));  
+}
+
+
+function getRandomMovies(movies, count) {
+    if (!movies || movies.length === 0) return [];
+    return movies.sort(() => 0.5 - Math.random()).slice(0, count);
+}

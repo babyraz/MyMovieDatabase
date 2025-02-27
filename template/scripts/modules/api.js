@@ -1,4 +1,3 @@
-
 export async function fetchTopMovies() {
     try {
         const response = await fetch('https://santosnr6.github.io/Data/favoritemovies.json'); // Replace with actual API URL
@@ -8,7 +7,7 @@ export async function fetchTopMovies() {
         const movies = await response.json(); 
         return movies;
     } catch (error) {
-        console.error("Error fetching movies:", error);
+        alert("Error fetching movies:", error);
         return []; 
     }
 }
@@ -23,8 +22,8 @@ export async function fetchMovies(search) {
         const data = await response.json();
         return data;  
     } catch (error) {
-        console.error("Error fetching movies:", error);
-        return null;  // Return null if there's an error
+        alert("Error fetching movies:", error);
+        return null;  
     }
 }
 
@@ -64,12 +63,10 @@ export async function fetchMovieByID(movieID) {
             throw new Error(`Error parsing JSON: ${jsonError.message}`);
         }
 
-        // Log the response to check the data
-        console.log('API Response:', movie);
 
         return movie;
     } catch (error) {
-        console.log('Error fetching movie details:', error.message);
-        return null; // Return null in case of error (to avoid further issues)
+        alert('Error fetching movie details:', error.message);
+        return null; 
     }
 }

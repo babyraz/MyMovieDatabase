@@ -17,7 +17,7 @@ export async function addEventListenersSearch() {
             }
         });
     } else {
-        console.log('Button or input not found!'); // Felsökning om knappen eller inputfältet inte hittas
+        
     }
 }
 
@@ -43,11 +43,11 @@ export function addEventListenerDetails() {
 
 export function addEventListenerFavorites(){
     const favoritesBtn = document.querySelectorAll('.favorites-btn');
-    console.log('lyssnaren lyssnar');
+    //console.log('lyssnaren lyssnar');
 
     favoritesBtn.forEach(button => {
         button.addEventListener('click', (event) =>{
-            console.log('button pressed');
+            //console.log('button pressed');
             const movieID = button.getAttribute('data-id');
 
             if (movieID){
@@ -56,15 +56,4 @@ export function addEventListenerFavorites(){
         });
     });
 }
-
-/*export function addEventListenerFavorites() {
-    const buttons = document.querySelectorAll('.favorites-btn'); // Select all favorite buttons
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const movieID = event.target.getAttribute('data-id'); // Get movieID from button
-            addToFavorites(movieID, event.target);  // Call your addToFavorites function
-        });
-    });
-
-}*/
 
