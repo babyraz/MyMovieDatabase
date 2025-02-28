@@ -1,4 +1,4 @@
-import { getFavorites } from '../modules/favorites.js';
+import { getFavorites, addToFavorites } from '../modules/favorites.js';
 import { fetchMovies, fetchMoviesFull, fetchMovieByID, fetchTopMovies } from '../modules/api.js';
 import { addEventListenerDetails, addEventListenerFavorites } from './utils.js';
 import { createMovieCard } from '../components/movieCard.js';  
@@ -9,7 +9,7 @@ export function displayTopMovies(movies) {
     container.innerHTML = '';  
 
     movies.forEach(movie => {
-        const movieCard = createMovieCard(movie); // Använd den externa funktionen för att skapa card
+        const movieCard = createMovieCard(movie); 
         container.appendChild(movieCard);
         addEventListenerDetails();
         addEventListenerFavorites();
@@ -27,11 +27,11 @@ export async function handleSearch(query) {
             cardContainer.innerHTML = ''; 
 
             data.Search.forEach(movie => {
-                const movieCard = createMovieCard(movie); // Använd den externa funktionen för att skapa card
+                const movieCard = createMovieCard(movie);
                 cardContainer.appendChild(movieCard);
             });
 
-            addEventListenerDetails(); // Lägg till eventlyssnare
+            addEventListenerDetails(); 
             addEventListenerFavorites();
             
         } else {
@@ -58,7 +58,8 @@ export function displayMovieDetails(movie) {
             <p><strong>Director:</strong> ${movie.Director}</p>
             <p><strong>Plot:</strong> ${movie.Plot}</p>
             <p><strong>IMDB Rating:</strong> ${movie.imdbRating}</p>
-            ${movie.imdbID ? `<button class="favorites-btn" data-id=${movie.imdbID}">Add to favorites</button>`: ''}
+            ${movie.imdbID ? `<button class="favorites-btn" data-id="${movie.imdbID}">Add to favorites</button>` : ''}
+
         </div>
     `;
 }
@@ -67,37 +68,39 @@ export async function displayFavorites() {
     const favoritesList = getFavorites();
 
     if (!favoritesList || favoritesList.length === 0) {
-        
         const favoritesTitle = document.getElementById('favoritesTitle');
         favoritesTitle.innerHTML = 'No favorites found';
-
         return;
     }
 
     for (const movieID of favoritesList) {
         try {
-            const movie = await fetchMovieByID(movieID);
+            const movie = await fetchMovieByID(movieID); 
 
-            if (!movie) {
-                console.log('Skipping movie due to error or invalid data:', movieID);
-                continue;
+            //console.log(`Displaying movieID: ${movieID}`);
+
+            const movieCard = createMovieCard(movie); 
+
+            const favoritesBtn = movieCard.querySelector('.favorites-btn');
+            if (favoritesBtn) {
+                favoritesBtn.textContent = "Remove from favorites";
+                favoritesBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); 
+                    addToFavorites(movieID); 
+                });
             }
 
-            if (movie.Response === "False") { 
-                console.log('Movie not found:', movieID);
-                continue;
-            }
-
-            const movieCard = createMovieCard(movie);
             cardContainer.appendChild(movieCard);
-            
         } catch (error) {
             console.log('Error fetching movie details:', error);
         }
     }
+
     addEventListenerDetails();
-    
 }
+
+
+
 
 
 export async function loadMovieDetails() {
