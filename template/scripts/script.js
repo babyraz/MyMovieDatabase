@@ -1,6 +1,5 @@
-
-import { handleSearch, displayFavorites, loadMovieDetails, init } from './utils/domUtils.js'; // Importera handleSearch
-import { addEventListenerDetails, addEventListenersSearch } from './utils/utils.js'; // Importera addEventListenerDetails
+import { handleSearch, displayFavorites, loadMovieDetails, init } from './utils/domUtils.js'; 
+import { addEventListenerDetails, addEventListenersSearch } from './utils/utils.js'; 
 
 
 if (window.location.pathname.includes('index.html')) {
@@ -17,8 +16,7 @@ if (window.location.pathname.includes('index.html')) {
 
 } else if (window.location.pathname.includes('movie.html')) {
 
-    loadMovieDetails();
-    
+    loadMovieDetails();   
     
 } else if (window.location.pathname.includes('search.html')) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -28,6 +26,5 @@ if (window.location.pathname.includes('index.html')) {
     if (query) {
         handleSearch(query);
     }
-
 }
 
