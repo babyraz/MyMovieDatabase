@@ -1,11 +1,11 @@
 import { addToFavorites } from '../modules/favorites.js';
-// Funktion för att lägga till eventlyssnare
+
 export async function addEventListenersSearch() {
     const searchBtn = document.getElementById('searchBtn');  // Hämta knappen från DOM
     const searchInput = document.getElementById('searchInput');  // Hämta sökfältet från DOM
 
     if (searchBtn && searchInput) {
-        console.log('Button and input found!'); // Lägg till detta för att se om knappen och sökfältet hittas
+        
         searchBtn.addEventListener('click', (event) => {
             event.preventDefault();  // Förhindra eventuellt standardbeteende
             const query = searchInput.value.trim();  // Hämta användarens sökterm
@@ -13,7 +13,7 @@ export async function addEventListenersSearch() {
             if (query) {
                 window.location.href = `search.html?q=${encodeURIComponent(query)}`;  // Byt sida till search.html och skicka med query
             } else {
-                console.log('No search query entered.');
+                alert('No search query entered.');
             }
         });
     } else {
@@ -35,25 +35,34 @@ export function addEventListenerDetails() {
             if (movieId) {
                 window.location.href = `movie.html?id=${encodeURIComponent(movieId)}`; // Skicka användaren till movie.html med filmens ID i URL:en
             } else {
-                console.error("No movie ID found!"); // Felsökning om något går fel
+                alert("No movie ID found!"); // Felsökning om något går fel
             }
         });
     });
 }
 
-export function addEventListenerFavorites(){
-    const favoritesBtn = document.querySelectorAll('.favorites-btn');
-    //console.log('lyssnaren lyssnar');
+export function addEventListenerFavorites() {
+    const favoritesBtns = document.querySelectorAll('.favorites-btn');
+    const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
 
-    favoritesBtn.forEach(button => {
-        button.addEventListener('click', (event) =>{
-            //console.log('button pressed');
-            const movieID = button.getAttribute('data-id');
+    favoritesBtns.forEach(button => {
+        const movieID = button.getAttribute('data-id');
 
-            if (movieID){
-                addToFavorites(movieID)
-            }
+        // sätt korrekt knappar
+        if (favoritesList.includes(movieID)) {
+            button.textContent = "Remove from favorites";
+        } else {
+            button.textContent = "Add to favorites";
+        }
+
+       
+        button.replaceWith(button.cloneNode(true)); // klonar knapp utan lyssnare
+        const newButton = document.querySelector(`.favorites-btn[data-id="${movieID}"]`);
+
+        // ✅ Add a fresh event listener
+        newButton.addEventListener('click', (event) => {
+            event.stopPropagation();  // stoppar "bubbling issues"
+            addToFavorites(movieID);
         });
     });
 }
-
